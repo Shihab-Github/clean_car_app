@@ -19,12 +19,12 @@ export default class UserDataSource implements IUserDataSource {
       email: "gerat.razashihab@gmail.com",
     };
     let user3: User = {
-        id: "3",
-        firstName: "Triss",
-        lastName: "Merigold",
-        phoneNumber: "01676215472",
-        email: "triss.razashihab@gmail.com",
-      };
+      id: "3",
+      firstName: "Triss",
+      lastName: "Merigold",
+      phoneNumber: "01676215472",
+      email: "triss.razashihab@gmail.com",
+    };
     users.push(user1);
     users.push(user2);
     users.push(user3);
