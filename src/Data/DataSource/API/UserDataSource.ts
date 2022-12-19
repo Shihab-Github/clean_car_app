@@ -1,4 +1,5 @@
 import { User } from "../../../Domain/Model/User/User";
+import { Credentials } from "../../../interfaces";
 import IUserDataSource from "../IUserDataSource";
 
 export default class UserDataSource implements IUserDataSource {
@@ -29,5 +30,15 @@ export default class UserDataSource implements IUserDataSource {
     users.push(user2);
     users.push(user3);
     return users;
+  }
+
+  login(loginData: Credentials): boolean {
+    if (
+      loginData.email === "superadmin@app.co" &&
+      loginData.password === "12345"
+    ) {
+      return true;
+    }
+    return false;
   }
 }
