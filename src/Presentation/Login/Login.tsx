@@ -80,7 +80,11 @@ export default function Login() {
           </Button>
           <Typography variant="subtitle1" gutterBottom component="div">
             Don't have an account ? Sign up{" "}
-            <Link underline="always" onClick={redirect}>
+            <Link
+              sx={{ cursor: "pointer" }}
+              underline="always"
+              onClick={redirect}
+            >
               Here
             </Link>
           </Typography>

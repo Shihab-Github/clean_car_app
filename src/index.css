@@ -21,7 +21,16 @@
   -webkit-text-size-adjust: 100%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 body {
   font-family: "Lato", Inter, Avenir, Helvetica, Arial, sans-serif;
