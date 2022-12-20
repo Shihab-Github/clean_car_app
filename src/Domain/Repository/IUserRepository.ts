@@ -3,6 +3,6 @@ import { User } from "../Model/User/User";
 
 export interface IUserRepository {
   getUsers(): User[];
-  login(loginData: Credentials): boolean;
+  login(loginData: Credentials): Response;
   signUp(data: User): Response;
 }

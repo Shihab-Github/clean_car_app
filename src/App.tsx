@@ -7,6 +7,9 @@ import Login from "./Presentation/Login/Login";
 import { UserType } from "./interfaces";
 
 const SignUp = lazy(() => import("./Presentation/SignUp/SignUp"));
+const EmployeeLanding = lazy(() => import("./Presentation/EmployeeLanding"));
+const Customers = lazy(() => import("./Presentation/Customers"));
+const Cars = lazy(() => import("./Presentation/Cars"));
 
 function App() {
   useEffect(() => {
@@ -17,6 +20,7 @@ function App() {
       lastName: "Admin",
       email: "superadmin@app.co",
       phoneNumber: 11228899,
+      password: "123",
     };
     let users: User[] = [];
     users.push(admin);
@@ -28,6 +32,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
+          <Route path="/employee" element={<EmployeeLanding />}>
+            <Route path="customers" element={<Customers />} />
+            <Route path="cars" element={<Cars />} />
+          </Route>
         </Routes>
       </Router>
     </Suspense>

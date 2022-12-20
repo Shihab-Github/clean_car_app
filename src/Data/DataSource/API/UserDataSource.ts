@@ -1,6 +1,7 @@
 import { User } from "../../../Domain/Model/User/User";
-import { Credentials, Response, SignUpProps } from "../../../interfaces";
+import { Credentials, Response } from "../../../interfaces";
 import IUserDataSource from "../IUserDataSource";
+import { getUserList } from "../../../utils/helper";
 
 export default class UserDataSource implements IUserDataSource {
   getUsers(): User[] {
@@ -8,20 +9,46 @@ export default class UserDataSource implements IUserDataSource {
     return users;
   }
 
-  login(loginData: Credentials): boolean {
-    if (
-      loginData.email === "superadmin@app.co" &&
-      loginData.password === "12345"
-    ) {
-      return true;
+  _findUser(phoneNumber: number, password: string) {
+    let users: User[] = getUserList();
+    let existingUser = users.find(
+      (x) => x.phoneNumber === phoneNumber && x.password === password
+    );
+    if (existingUser) return existingUser;
+    return null;
+  }
+
+  login(loginData: Credentials): Response {
+    let user = this._findUser(loginData.phoneNumber, loginData.password);
+    if (loginData.phoneNumber === 11228899 && loginData.password === "123") {
+      let response: Response = {
+        statusCode: 200,
+        successMessage: "Success",
+        payload: user,
+      };
+      return response;
     }
-    return false;
+
+    if (user) {
+      let response: Response = {
+        statusCode: 200,
+        successMessage: "Success",
+        payload: user,
+      };
+      return response;
+    } else {
+      let response: Response = {
+        statusCode: 400,
+        errorMessage: "User not found",
+      };
+      return response;
+    }
   }
 
   signUp(data: User): Response {
     let users = JSON.parse(localStorage.getItem("users") || "[]");
     users.push(data);
-    localStorage.setItem('users', JSON.stringify(users))
+    localStorage.setItem("users", JSON.stringify(users));
     let response: Response = {
       statusCode: 201,
       successMessage: "User has been created Successfully",

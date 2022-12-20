@@ -10,3 +10,8 @@ export function getUserTypes() {
   }
   return options;
 }
+
+export function getUserList() {
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  return users;
+}

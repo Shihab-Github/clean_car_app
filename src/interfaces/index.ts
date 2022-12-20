@@ -1,7 +1,7 @@
 import { AlertColor } from "@mui/material";
 
 export interface Credentials {
-  email: string;
+  phoneNumber: number;
   password: string;
 }
 
@@ -18,6 +18,7 @@ export interface Response {
   statusCode: number;
   errorMessage?: string;
   successMessage?: string;
+  payload?: object | [] | null
 }
 
 export interface SnackBarProps {

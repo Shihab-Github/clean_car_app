@@ -57,7 +57,7 @@ export default function SignUp() {
     <>
       <Box className="signup-container">
         <Stack spacing={2}>
-          <Typography variant="h5">
+          <Typography variant="h5" textAlign="center">
             Welcome ! Please sign up so that we can help you get started
           </Typography>
           <CustomTextField
@@ -152,7 +152,7 @@ export default function SignUp() {
           <Button variant="contained" onClick={submit} disabled={!isValid}>
             Sign Up
           </Button>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography textAlign="center" variant="subtitle1" gutterBottom component="div">
             Already have an account ? Log in{" "}
             <Link sx={{ cursor: "pointer" }} onClick={redirect}>
               Here

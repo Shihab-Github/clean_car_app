@@ -11,6 +11,8 @@ import Snackbars from "../../shared/UI/Snackbar";
 import "./style.css";
 import useLogin from "./hooks/useLogin";
 import { AlertColor } from "@mui/material";
+import { Credentials } from "../../interfaces";
+import { User } from "../../Domain/Model/User/User";
 
 export default function Login() {
   const [
@@ -32,13 +34,20 @@ export default function Login() {
   };
 
   const submit = () => {
-    let data = {
-      email: getValues("email"),
+    let data: Credentials = {
+      phoneNumber: Number(getValues("phoneNumber")),
       password: getValues("password"),
     };
     let res = login(data);
-    if (!res) {
-      setToast("Email or Password incorrect", "error");
+    if (res.statusCode === 400) {
+      setToast(res.errorMessage ?? "", "error");
+    } else {
+      let user = res.payload as User;
+      if (user.type === "customer") {
+        navigate("/customer/dashboard");
+      } else {
+        navigate("/employee/customers");
+      }
     }
   };
 
@@ -46,17 +55,19 @@ export default function Login() {
     <>
       <Box className="login-container">
         <Stack spacing={2}>
-          <Typography variant="h5">Welcome !</Typography>
+          <Typography variant="h5" textAlign={"center"}>
+            Welcome !
+          </Typography>
           <CustomTextField
-            label={"Email *"}
+            label={"Phone Number *"}
             type="text"
-            name={"email"}
+            name={"phoneNumber"}
             register={register}
             errors={errors}
             criterions={{
               required: {
                 value: true,
-                message: "Name cannot be empty",
+                message: "Phone Number cannot be empty",
               },
             }}
             fullWidth
@@ -78,7 +89,12 @@ export default function Login() {
           <Button variant="contained" onClick={submit} disabled={!isValid}>
             Login
           </Button>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography
+            textAlign={"center"}
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+          >
             Don't have an account ? Sign up{" "}
             <Link
               sx={{ cursor: "pointer" }}

@@ -1,8 +1,8 @@
-import { Credentials } from "../../../interfaces";
+import { Credentials, Response } from "../../../interfaces";
 import { IUserRepository } from "../../Repository/IUserRepository";
 
 export interface LoginUserUseCase {
-  login: (loginData: Credentials) => boolean;
+  login: (loginData: Credentials) => Response;
 }
 
 export class Login implements LoginUserUseCase {
@@ -11,8 +11,7 @@ export class Login implements LoginUserUseCase {
     this.userRepo = _userRepo;
   }
 
-  login(loginData: Credentials) {
-    let isSuccess = this.userRepo.login(loginData);
-    return isSuccess;
+  login(loginData: Credentials): Response {
+    return this.userRepo.login(loginData);
   }
 }

@@ -1,6 +1,6 @@
 import { User } from "../../Domain/Model/User/User";
 import { IUserRepository } from "../../Domain/Repository/IUserRepository";
-import { Credentials, Response, SignUpProps } from "../../interfaces";
+import { Credentials, Response } from "../../interfaces";
 import UserDataSource from "../DataSource/API/UserDataSource";
 
 export class UserRepository implements IUserRepository {
@@ -14,7 +14,7 @@ export class UserRepository implements IUserRepository {
     return this.dataSouce.getUsers();
   }
 
-  login(loginData: Credentials): boolean {
+  login(loginData: Credentials): Response {
     return this.dataSouce.login(loginData)
   }
 
