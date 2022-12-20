@@ -7,15 +7,25 @@ import Typography from "@mui/material/Typography";
 import CustomTextField from "../Shared/CustomTextField";
 import DropDown from "../../shared/UI/DropDown";
 import Link from "@mui/material/Link";
+import useToast from "../../shared/hooks/useToast";
 import { getUserTypes } from "../../utils/helper";
+import useSignUp from "./hooks/useSignUp";
+import { AlertColor } from "@mui/material";
+import Snackbars from "../../shared/UI/Snackbar";
 import "./style.css";
 
 export default function SignUp() {
+  const [
+    { snackbarOpen, setSnackbarOpen, snackbarMessage, snackbarSeverity },
+    setToast,
+  ] = useToast();
+  const [{ signUp }] = useSignUp();
   const navigate = useNavigate();
   const {
     register,
     formState: { errors, isValid },
     getValues,
+    watch,
   } = useForm({
     mode: "onChange",
   });
@@ -29,12 +39,19 @@ export default function SignUp() {
       firstName: getValues("firstName"),
       lastName: getValues("lastName"),
       type: getValues("userType"),
-      phone: getValues('phone'),
-      password: getValues('password'),
-      password2: getValues('password2')
+      phoneNumber: getValues("phoneNumber"),
+      password: getValues("password"),
+      password2: getValues("password2"),
     };
-    console.log("data: ", data);
+    const res = signUp(data);
+    if (res.statusCode === 201) {
+      setToast(res.successMessage ? res.successMessage : "", "success");
+    } else {
+      setToast(res.errorMessage ? res.errorMessage : "", "error");
+    }
   };
+
+  console.log(getValues("password"));
 
   return (
     <>
@@ -99,7 +116,7 @@ export default function SignUp() {
           />
           <CustomTextField
             label={"Password*"}
-            type="text"
+            type="password"
             name={"password"}
             register={register}
             errors={errors}
@@ -113,7 +130,7 @@ export default function SignUp() {
           />
           <CustomTextField
             label={"Re-type Password*"}
-            type="text"
+            type="password"
             name={"password2"}
             register={register}
             errors={errors}
@@ -121,6 +138,13 @@ export default function SignUp() {
               required: {
                 value: true,
                 message: "Please retype password",
+              },
+              validate: (val: string) => {
+                if (watch("password") != val) {
+                  return "Your passwords do not match";
+                } else {
+                  return true;
+                }
               },
             }}
             fullWidth
@@ -136,6 +160,12 @@ export default function SignUp() {
           </Typography>
         </Stack>
       </Box>
+      <Snackbars
+        open={snackbarOpen}
+        setOpen={setSnackbarOpen}
+        message={snackbarMessage}
+        severity={snackbarSeverity as AlertColor}
+      />
     </>
   );
 }

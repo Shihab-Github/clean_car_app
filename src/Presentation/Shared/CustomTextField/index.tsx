@@ -9,6 +9,7 @@ interface TextFieldProps {
   errors: any;
   criterions: object;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 const CustomTextField = (props: TextFieldProps) => {
