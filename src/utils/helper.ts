@@ -1,3 +1,4 @@
+import CarDataSource from "../Data/DataSource/API/CarDataSource";
 import { UserType, YesNo } from "../interfaces";
 
 export function getUserTypes() {
@@ -25,4 +26,9 @@ export function getYesNoValues() {
 export function getUserList() {
   let users = JSON.parse(localStorage.getItem("users") || "[]");
   return users;
+}
+
+export function getCarList() {
+  let cars = JSON.parse(localStorage.getItem("cars") || "[]");
+  return cars;
 }

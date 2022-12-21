@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,6 +12,7 @@ interface AppbarProps {
 }
 
 export default function ButtonAppBar({ toggleDrawer }: AppbarProps) {
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -28,7 +30,9 @@ export default function ButtonAppBar({ toggleDrawer }: AppbarProps) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Employee Dashboard
           </Typography>
-          <Button color="inherit">Log Out</Button>
+          <Button color="inherit" onClick={() => navigate("/")}>
+            Log Out
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

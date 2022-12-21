@@ -4,11 +4,14 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CustomTextField from "../../Shared/CustomTextField";
 import DropDown from "../../../shared/UI/DropDown";
+import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 import { getYesNoValues } from "../../../utils/helper";
-import useCustomerDropdown from "../../../shared/hooks/useCustomerDropdown";
+import useCreateCar from "./hooks/useCreateCar";
+import { Response } from "../../../interfaces";
 
 export default function CreateCar() {
-  const [customers] = useCustomerDropdown();
+  const [saveCar] = useCreateCar();
   const {
     register,
     formState: { errors, isValid },
@@ -18,13 +21,34 @@ export default function CreateCar() {
     mode: "onChange",
   });
 
-  console.log("customers: ", customers);
+  const submit = () => {
+    let data = {
+      brand: getValues("brand"),
+      build: getValues("build"),
+      year: getValues("year"),
+      dayPrice: getValues("dayPrice"),
+      isFeatured: getValues("isFeatured"),
+    };
+    let response: Response = saveCar(data);
+  };
 
   return (
     <Box>
-      <Typography variant="h5">Create New Car</Typography>
-
-      <Box mt={3}>
+      <Box display="flex" alignItems="center" mb={3}>
+        <Box flexGrow={1}>
+          <Typography variant="h5">Create New Car</Typography>
+        </Box>
+        <Box>
+          <Button variant="text">Cancel</Button>
+        </Box>
+        <Box ml={2}>
+          <Button variant="contained" onClick={submit} disabled={!isValid}>
+            Save
+          </Button>
+        </Box>
+      </Box>
+      <Divider />
+      <Box mt={4}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <CustomTextField
@@ -62,10 +86,16 @@ export default function CreateCar() {
           <Grid item xs={4}>
             <CustomTextField
               type="number"
-              label="Day Price"
+              label="Day Price (All prices are in USD)"
               name="dayPrice"
               errors={errors}
               register={register}
+              criterions={{
+                required: {
+                  value: true,
+                  message: "Day Price cannot be empty",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={4}>
