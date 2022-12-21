@@ -4,12 +4,13 @@ import "./App.css";
 import { User } from "./Domain/Model/User/User";
 import { v4 as uuid } from "uuid";
 import Login from "./Presentation/Login/Login";
+import CreateCar from "./Presentation/Cars/CreateCar";
+import Customers from "./Presentation/Customers";
+import Cars from "./Presentation/Cars";
 import { UserType } from "./interfaces";
 
 const SignUp = lazy(() => import("./Presentation/SignUp/SignUp"));
 const EmployeeLanding = lazy(() => import("./Presentation/EmployeeLanding"));
-const Customers = lazy(() => import("./Presentation/Customers"));
-const Cars = lazy(() => import("./Presentation/Cars"));
 
 function App() {
   useEffect(() => {
@@ -34,6 +35,10 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/employee" element={<EmployeeLanding />}>
             <Route path="customers" element={<Customers />} />
+            <Route path="cars" element={<Cars />} />
+            <Route path="newCar" element={<CreateCar />} />
+          </Route>
+          <Route path="/customer" element={<EmployeeLanding />}>
             <Route path="cars" element={<Cars />} />
           </Route>
         </Routes>

@@ -13,6 +13,7 @@ import useSignUp from "./hooks/useSignUp";
 import { AlertColor } from "@mui/material";
 import Snackbars from "../../shared/UI/Snackbar";
 import "./style.css";
+import { User } from "../../Domain/Model/User/User";
 
 export default function SignUp() {
   const [
@@ -30,8 +31,8 @@ export default function SignUp() {
     mode: "onChange",
   });
 
-  const redirect = () => {
-    navigate("/");
+  const redirect = (path:string) => {
+    navigate(path);
   };
 
   const submit = () => {
@@ -46,6 +47,7 @@ export default function SignUp() {
     const res = signUp(data);
     if (res.statusCode === 201) {
       setToast(res.successMessage ? res.successMessage : "", "success");
+      redirect('/')
     } else {
       setToast(res.errorMessage ? res.errorMessage : "", "error");
     }
@@ -154,7 +156,7 @@ export default function SignUp() {
           </Button>
           <Typography textAlign="center" variant="subtitle1" gutterBottom component="div">
             Already have an account ? Log in{" "}
-            <Link sx={{ cursor: "pointer" }} onClick={redirect}>
+            <Link sx={{ cursor: "pointer" }} onClick={() => redirect('/')}>
               Here
             </Link>
           </Typography>

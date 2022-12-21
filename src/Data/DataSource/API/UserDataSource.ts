@@ -5,14 +5,15 @@ import { getUserList } from "../../../utils/helper";
 
 export default class UserDataSource implements IUserDataSource {
   getUsers(): User[] {
-    const users: User[] = [];
-    return users;
+    const allUsers: User[] = getUserList();
+    const customers = allUsers.filter((x) => x.type === "customer");
+    return customers;
   }
 
   _findUser(phoneNumber: number, password: string) {
     let users: User[] = getUserList();
     let existingUser = users.find(
-      (x) => x.phoneNumber === phoneNumber && x.password === password
+      (x) => Number(x.phoneNumber) === phoneNumber && x.password === password
     );
     if (existingUser) return existingUser;
     return null;
@@ -52,6 +53,7 @@ export default class UserDataSource implements IUserDataSource {
     let response: Response = {
       statusCode: 201,
       successMessage: "User has been created Successfully",
+      payload: data
     };
     return response;
   }

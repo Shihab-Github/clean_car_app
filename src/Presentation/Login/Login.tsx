@@ -44,7 +44,7 @@ export default function Login() {
     } else {
       let user = res.payload as User;
       if (user.type === "customer") {
-        navigate("/customer/dashboard");
+        navigate("/customer/cars");
       } else {
         navigate("/employee/customers");
       }

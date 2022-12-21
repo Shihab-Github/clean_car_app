@@ -7,7 +7,7 @@ interface TextFieldProps {
   placeholder?: string;
   register: any;
   errors: any;
-  criterions: object;
+  criterions?: object;
   fullWidth?: boolean;
   disabled?: boolean;
 }

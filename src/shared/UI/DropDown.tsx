@@ -14,7 +14,7 @@ interface DropDownProps {
   value: string;
   handleChange?: () => void;
   register: any;
-  criterions: object;
+  criterions?: object;
 }
 
 export default function DropDown({
