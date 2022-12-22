@@ -27,8 +27,3 @@ export function getUserList() {
   let users = JSON.parse(localStorage.getItem("users") || "[]");
   return users;
 }
-
-export function getCarList() {
-  let cars = JSON.parse(localStorage.getItem("cars") || "[]");
-  return cars;
-}

@@ -13,4 +13,9 @@ export class CarRepository implements ICarRepository {
   saveCar(data: Car): Response {
     return this.dataSource.saveCar(data);
   }
+
+  getCars(): Car[] {
+    return this.dataSource.getCars()
+  }
+
 }
