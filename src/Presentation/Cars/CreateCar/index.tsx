@@ -90,15 +90,27 @@ export default function CreateCar() {
                 name="build"
                 errors={errors}
                 register={register}
+                criterions={{
+                  required: {
+                    value: true,
+                    message: "Build cannot be empty",
+                  },
+                }}
               />
             </Grid>
             <Grid item xs={4}>
               <CustomTextField
                 type="number"
-                label="Year"
+                label="Build Year"
                 name="year"
                 errors={errors}
                 register={register}
+                criterions={{
+                  required: {
+                    value: true,
+                    message: "Build Year cannot be empty",
+                  },
+                }}
               />
             </Grid>
             <Grid item xs={4}>

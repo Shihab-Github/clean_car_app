@@ -2,6 +2,7 @@ import { Rent } from "../../../Domain/Model/Rent/Rent";
 import { Response } from "../../../interfaces";
 import observableCarStore from "../../../store/ObservableCarStore";
 import observableRentStore from "../../../store/ObservableRentStore";
+import observableUserStore from "../../../store/ObservableUserStore";
 import { IRentDataSource } from "../IRentDataSource";
 
 export class RentDataSource implements IRentDataSource {
@@ -17,5 +18,12 @@ export class RentDataSource implements IRentDataSource {
 
   getRents(): Rent[] {
     return observableRentStore.rentList;
+  }
+
+  getRentsByUser(): Rent[] {
+    let rentsByUser = observableRentStore.rentList.filter(
+      (x) => x.user.id === observableUserStore.loggedInUser?.id
+    );
+    return rentsByUser;
   }
 }

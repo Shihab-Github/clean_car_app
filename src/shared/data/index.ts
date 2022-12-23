@@ -22,6 +22,10 @@ export const employerMenu: Menu[] = [
 export const customerMenu: Menu[] = [
   {
     title: "Cars",
-    path: "/employee/cars",
+    path: "/customer/cars",
   },
+  {
+    title: 'My Rent History',
+    path: "/customer/myrents"
+  }
 ];

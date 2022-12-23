@@ -17,4 +17,8 @@ export class RentRepository implements IRentRepository {
   getRents(): Rent[] {
     return this.dataSource.getRents()
   }
+
+  getRentsByUser(): Rent[] {
+    return this.dataSource.getRentsByUser()
+  }
 }

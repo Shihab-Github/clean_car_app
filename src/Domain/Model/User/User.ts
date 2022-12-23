@@ -1,4 +1,5 @@
 import { UserType } from "../../../interfaces";
+import { Car } from "../Car/Car";
 
 export interface User {
   id: string;
@@ -6,6 +7,6 @@ export interface User {
   lastName: string;
   phoneNumber: number;
   email?: string;
-  type: UserType
+  type: UserType;
   password?: string;
 }

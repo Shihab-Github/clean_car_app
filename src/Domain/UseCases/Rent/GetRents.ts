@@ -14,4 +14,8 @@ export class GetRents implements GetRentUseCase {
   getRents(): Rent[] {
     return this.rentRepo.getRents();
   }
+
+  getRentsByUser(): Rent[] {
+    return this.rentRepo.getRentsByUser();
+  }
 }

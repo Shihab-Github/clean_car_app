@@ -1,19 +1,20 @@
-import useFetchRents from "./hooks/useFetchRents";
+import React from "react";
+import useMyRentHistory from "./hooks/useMyRentHistory";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import Grid from '@mui/material/Grid'
 import RentHistory from "./RentHistory";
 
-export default function Rents() {
-  const [rents] = useFetchRents();
+export default function MyRents() {
+  const [myRents] = useMyRentHistory();
 
-  if (rents.length === 0) {
+  if (myRents.length === 0) {
     return (
       <>
         <Typography mb={2} variant="h4">
           Rent History
         </Typography>
         <Typography mb={2} variant="body1">
-          No Cars has been rented yet
+          You have not rented any car yet
         </Typography>
       </>
     );
@@ -22,10 +23,10 @@ export default function Rents() {
   return (
     <>
       <Typography mb={2} variant="h4">
-        Rent History
+        My Rent History
       </Typography>
       <Grid container spacing={1}>
-        {rents.map((rent) => (
+        {myRents.map((rent) => (
           <RentHistory rent={rent} />
         ))}
       </Grid>
