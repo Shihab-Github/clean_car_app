@@ -13,6 +13,10 @@ export const employerMenu: Menu[] = [
     title: "Cars",
     path: "/employee/cars",
   },
+  {
+    title: "Rents",
+    path: "/employee/rents",
+  },
 ];
 
 export const customerMenu: Menu[] = [

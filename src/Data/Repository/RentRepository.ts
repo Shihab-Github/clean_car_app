@@ -13,4 +13,8 @@ export class RentRepository implements IRentRepository {
   rentCar(rentInfo: Rent): Response {
       return this.dataSource.rentCar(rentInfo)
   }
+
+  getRents(): Rent[] {
+    return this.dataSource.getRents()
+  }
 }

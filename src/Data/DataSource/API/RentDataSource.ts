@@ -14,4 +14,8 @@ export class RentDataSource implements IRentDataSource {
     };
     return response;
   }
+
+  getRents(): Rent[] {
+    return observableRentStore.rentList;
+  }
 }

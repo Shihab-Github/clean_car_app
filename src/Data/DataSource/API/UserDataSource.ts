@@ -1,17 +1,15 @@
 import { User } from "../../../Domain/Model/User/User";
 import { Credentials, Response } from "../../../interfaces";
 import IUserDataSource from "../IUserDataSource";
-import { getUserList } from "../../../utils/helper";
 import observableUserStore from "../../../store/ObservableUserStore";
 
 export default class UserDataSource implements IUserDataSource {
   getUsers(): User[] {
-    return observableUserStore.customers;
+    return observableUserStore.users.filter(x => x.type === 'customer');
   }
 
   _findUser(phoneNumber: number, password: string) {
-    let users: User[] = getUserList();
-    let existingUser = users.find(
+    let existingUser = observableUserStore.users.find(
       (x) => Number(x.phoneNumber) === phoneNumber && x.password === password
     );
     if (existingUser) return existingUser;
@@ -48,11 +46,7 @@ export default class UserDataSource implements IUserDataSource {
   }
 
   signUp(data: User): Response {
-    if(data.type === 'customer'){
-      observableUserStore.addCustomer(data)
-    }else {
-      observableUserStore.addEmployee(data)
-    }
+    observableUserStore.addUser(data);
     let response: Response = {
       statusCode: 201,
       successMessage: "User has been created Successfully",

@@ -13,7 +13,6 @@ import useSignUp from "./hooks/useSignUp";
 import { AlertColor } from "@mui/material";
 import Snackbars from "../../shared/UI/Snackbar";
 import "./style.css";
-import { User } from "../../Domain/Model/User/User";
 
 export default function SignUp() {
   const [
@@ -31,7 +30,7 @@ export default function SignUp() {
     mode: "onChange",
   });
 
-  const redirect = (path:string) => {
+  const redirect = (path: string) => {
     navigate(path);
   };
 
@@ -47,13 +46,13 @@ export default function SignUp() {
     const res = signUp(data);
     if (res.statusCode === 201) {
       setToast(res.successMessage ? res.successMessage : "", "success");
-      redirect('/')
+      setTimeout(() => {
+        redirect("/");
+      }, 1000);
     } else {
       setToast(res.errorMessage ? res.errorMessage : "", "error");
     }
   };
-
-  console.log(getValues("password"));
 
   return (
     <>
@@ -154,9 +153,14 @@ export default function SignUp() {
           <Button variant="contained" onClick={submit} disabled={!isValid}>
             Sign Up
           </Button>
-          <Typography textAlign="center" variant="subtitle1" gutterBottom component="div">
+          <Typography
+            textAlign="center"
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+          >
             Already have an account ? Log in{" "}
-            <Link sx={{ cursor: "pointer" }} onClick={() => redirect('/')}>
+            <Link sx={{ cursor: "pointer" }} onClick={() => redirect("/")}>
               Here
             </Link>
           </Typography>

@@ -5,13 +5,12 @@ import { UserType } from "../interfaces";
 class ObservableUserStore {
   private static _instance: ObservableUserStore;
   loggedInUser: User | null = null;
-  customers: User[] = [];
-  employees: User[] = [];
+  users: User[] = []
 
   constructor() {
     makeObservable(this, {
       loggedInUser: observable,
-      customers: observable,
+      users: observable,
       setLoggedInUser: action,
     });
     let admin: User = {
@@ -23,7 +22,7 @@ class ObservableUserStore {
       phoneNumber: 11228899,
       password: "123",
     };
-    this.employees.push(admin);
+    this.users.push(admin);
   }
 
   public static getInstance(): ObservableUserStore {
@@ -34,12 +33,8 @@ class ObservableUserStore {
     return ObservableUserStore._instance;
   }
 
-  addCustomer(user: User) {
-    this.customers.push(user);
-  }
-
-  addEmployee(user: User) {
-    this.employees.push(user);
+  addUser(user: User) {
+    this.users.push(user);
   }
 
   setLoggedInUser(user: User | null) {

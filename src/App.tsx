@@ -5,6 +5,7 @@ import Login from "./Presentation/Login/Login";
 import CreateCar from "./Presentation/Cars/CreateCar";
 import Customers from "./Presentation/Customers";
 import Cars from "./Presentation/Cars";
+import Rents from "./Presentation/Rents";
 
 const SignUp = lazy(() => import("./Presentation/SignUp/SignUp"));
 const EmployeeLanding = lazy(() => import("./Presentation/EmployeeLanding"));
@@ -21,6 +22,7 @@ function App() {
             <Route path="customers" element={<Customers />} />
             <Route path="cars" element={<Cars />} />
             <Route path="newCar" element={<CreateCar />} />
+            <Route path="rents" element={<Rents />} />
           </Route>
           <Route path="/customer" element={<CustomerLanding />}>
             <Route path="cars" element={<Cars />} />
