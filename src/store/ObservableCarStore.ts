@@ -20,6 +20,11 @@ class ObservableCarStore {
     return ObservableCarStore._instance;
   }
 
+  markCarAsRented(carId: string) {
+    let carIdx = this.cars.findIndex((x) => x.id === carId);
+    this.cars[carIdx].isRented = true;
+  }
+
   addCar(car: Car) {
     this.cars.push(car);
   }
@@ -28,5 +33,3 @@ class ObservableCarStore {
 const observableCarStore = ObservableCarStore.getInstance();
 Object.freeze(observableCarStore);
 export default observableCarStore;
-
-// export default ObservableCarStore;

@@ -12,9 +12,25 @@ export default function Cars() {
       setExpanded(isExpanded ? panel : false);
     };
 
+  if (cars.length === 0) {
+    return (
+      <>
+        <Typography mb={2} variant="h4">
+          Cars
+        </Typography>
+        <Typography mb={2} variant="body1">
+          No Cars Available
+        </Typography>
+      </>
+    );
+  }
+
   return (
     <>
-      <Typography mb={2} variant="h4">Cars</Typography>
+      <Typography mb={2} variant="h4">
+        Cars
+      </Typography>
+
       {cars.map((car) => (
         <CarAccordion
           key={car.id}

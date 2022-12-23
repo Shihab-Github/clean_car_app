@@ -7,4 +7,5 @@ export interface Car {
   year: number;
   dayPrice: number;
   isFeatured: YesNo;
+  isRented: boolean;
 }

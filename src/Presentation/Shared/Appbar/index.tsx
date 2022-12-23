@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import observableUserStore from "../../../store/ObservableUserStore";
 
 interface AppbarProps {
   toggleDrawer: () => void;
@@ -13,6 +14,12 @@ interface AppbarProps {
 
 export default function ButtonAppBar({ toggleDrawer }: AppbarProps) {
   const navigate = useNavigate();
+
+  const logOut = () => {
+    observableUserStore.setLoggedInUser(null);
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -30,7 +37,7 @@ export default function ButtonAppBar({ toggleDrawer }: AppbarProps) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Employee Dashboard
           </Typography>
-          <Button color="inherit" onClick={() => navigate("/")}>
+          <Button color="inherit" onClick={logOut}>
             Log Out
           </Button>
         </Toolbar>

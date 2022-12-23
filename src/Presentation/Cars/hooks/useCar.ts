@@ -10,7 +10,7 @@ export default function useCar() {
   useEffect(() => {
     const UseCase = new GetCars(new CarRepository(new CarDataSource()));
     let cars = UseCase.getCars();
-    setCars(cars)
+    setCars(cars);
   }, []);
 
   return [cars] as const;

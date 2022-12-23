@@ -11,6 +11,7 @@ import { UserType } from "./interfaces";
 
 const SignUp = lazy(() => import("./Presentation/SignUp/SignUp"));
 const EmployeeLanding = lazy(() => import("./Presentation/EmployeeLanding"));
+const CustomerLanding = lazy(() => import("./Presentation/CustomerLading"));
 
 function App() {
   useEffect(() => {
@@ -38,7 +39,7 @@ function App() {
             <Route path="cars" element={<Cars />} />
             <Route path="newCar" element={<CreateCar />} />
           </Route>
-          <Route path="/customer" element={<EmployeeLanding />}>
+          <Route path="/customer" element={<CustomerLanding />}>
             <Route path="cars" element={<Cars />} />
           </Route>
         </Routes>
