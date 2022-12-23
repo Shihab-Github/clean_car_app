@@ -35,7 +35,8 @@ export default function ButtonAppBar({ toggleDrawer }: AppbarProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Employee Dashboard
+            Hello{" "}
+            {`${observableUserStore.loggedInUser?.firstName} ${observableUserStore.loggedInUser?.lastName}`}
           </Typography>
           <Button color="inherit" onClick={logOut}>
             Log Out

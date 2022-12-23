@@ -28,10 +28,7 @@ export default function CustomerAccordion({
       <Accordion expanded={expanded === id} onChange={handleChange(id)}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id={id}>
           <Box display="flex" alignItems="center">
-            <Typography variant="h4" fontWeight="bold" component="div">
-              Name:
-            </Typography>
-            <Typography variant="h4" component="div">
+            <Typography component="div">
               {`${customer.firstName} ${customer.lastName}`}
             </Typography>
           </Box>

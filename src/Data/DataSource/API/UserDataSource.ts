@@ -6,9 +6,7 @@ import observableUserStore from "../../../store/ObservableUserStore";
 
 export default class UserDataSource implements IUserDataSource {
   getUsers(): User[] {
-    const allUsers: User[] = getUserList();
-    const customers = allUsers.filter((x) => x.type === "customer");
-    return customers;
+    return observableUserStore.customers;
   }
 
   _findUser(phoneNumber: number, password: string) {
@@ -50,9 +48,11 @@ export default class UserDataSource implements IUserDataSource {
   }
 
   signUp(data: User): Response {
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
+    if(data.type === 'customer'){
+      observableUserStore.addCustomer(data)
+    }else {
+      observableUserStore.addEmployee(data)
+    }
     let response: Response = {
       statusCode: 201,
       successMessage: "User has been created Successfully",
